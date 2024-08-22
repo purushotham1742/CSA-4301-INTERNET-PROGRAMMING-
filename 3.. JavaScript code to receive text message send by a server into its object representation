@@ -1,0 +1,31 @@
+// URL of the server endpoint
+const url = 'https://example.com/api/message';
+
+// Function to fetch the message from the server
+async function fetchMessage() {
+    try {
+        // Make the HTTP GET request
+        const response = await fetch(url);
+
+        // Check if the response is OK (status code 200-299)
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // Get the response text
+        const text = await response.text();
+
+        // Parse the text into a JavaScript object
+        // Assuming the server response is a JSON string
+        const messageObject = JSON.parse(text);
+
+        // Log or process the message object
+        console.log(messageObject);
+    } catch (error) {
+        // Handle errors
+        console.error('Error fetching message:', error);
+    }
+}
+
+// Call the function to fetch the message
+fetchMessage();
