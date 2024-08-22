@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Text Style</title>
+</head>
+<body>
+    <div id="message">This is the original message.</div>
+    <button id="updateButton">Update Style</button>
+
+    <script src="updateStyle.js"></script>
+</body>
+</html>
+
+document.getElementById('updateButton').addEventListener('click', function() {
+    // Fetch data from the server
+    fetch('/getStyle')
+        .then(response => response.json())
+        .then(data => {
+            // Get the message element
+            const messageElement = document.getElementById('message');
+
+            // Update the style based on server response
+            if (data.color) {
+                messageElement.style.color = data.color;
+            }
+            if (data.fontSize) {
+                messageElement.style.fontSize = data.fontSize;
+            }
+            if (data.fontWeight) {
+                messageElement.style.fontWeight = data.fontWeight;
+            }
+            if (data.fontStyle) {
+                messageElement.style.fontStyle = data.fontStyle;
+            }
+        })
+        .catch(error => console.error('Error fetching style data:', error));
+});
+{
+    "color": "blue",
+    "fontSize": "20px",
+    "fontWeight": "bold",
+    "fontStyle": "italic"
+}
+
